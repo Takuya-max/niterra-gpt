@@ -78,3 +78,5 @@ with gr.Blocks() as llm_web_app:
   
 # Gradio の立ち上げ
 llm_web_app.launch(server_name="0.0.0.0", server_port=7860)
+
+#テスト
