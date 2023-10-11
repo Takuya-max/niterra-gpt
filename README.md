@@ -31,15 +31,15 @@ gcloud artifacts repositories create $AR_REPO \
   --project=$PROJECT_ID
   
 # イメージの作成＆更新
-gcloud builds submit --tag $REGION-docker.pkg.dev/$PROJECT_ID/$AR_REPO/$SERVICE_NAME \
-  --project=$PROJECT_ID
+gcloud builds submit --tag asia-northeast1-docker.pkg.dev/dx-generativeai-dev/niterra-gpt/niterra-gpt \
+  --project=dx-generativeai-dev
   
 # Cloud Run デプロイ
 gcloud run deploy $SERVICE_NAME --port 7860 \
-  --image $REGION-docker.pkg.dev/$PROJECT_ID/$AR_REPO/$SERVICE_NAME \
+  --image asia-northeast1-docker.pkg.dev/dx-generativeai-dev/niterra-gpt/v \
   --no-allow-unauthenticated \
-  --service-account=$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com \
+  --service-account=niterra-gpt@dx-generativeai-dev.iam.gserviceaccount.com \
   --ingress=internal-and-cloud-load-balancing \
   --region=$REGION \
-  --set-env-vars=PROJECT_ID=$PROJECT_ID,LOCATION=$REGION \
-  --project=$PROJECT_ID
+  --set-env-vars=PROJECT_ID=dx-generativeai-dev,LOCATION=asia-northeast1 \
+  --project=dx-generativeai-dev
